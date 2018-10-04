@@ -89,6 +89,11 @@ func (d *Data) DataType() arrow.DataType { return d.dtype }
 func (d *Data) NullN() int               { return d.nulls }
 func (d *Data) Len() int                 { return d.length }
 
+// Buffers returns the memory buffers backing this data.
+func (d *Data) Buffers() []*memory.Buffer {
+	return d.buffers
+}
+
 // NewSliceData returns a new slice that shares backing data with the input.
 // The returned Data slice starts at i and extends j-i elements, such as:
 //    slice := data[i:j]
