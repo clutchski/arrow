@@ -142,6 +142,15 @@ func (b *Int64Builder) NewInt64Array() (a *Int64) {
 	return
 }
 
+func (b *Int64Builder) UnsafeInt64Array() (a *Int64) {
+
+	var data *Data
+	data = NewData(arrow.PrimitiveTypes.Int64, b.length, []*memory.Buffer{b.nullBitmap, b.data}, nil, b.nulls, 0)
+	a = NewInt64Data(data)
+	data.Release()
+	return a
+}
+
 func (b *Int64Builder) newData() (data *Data) {
 	bytesRequired := arrow.Int64Traits.BytesRequired(b.length)
 	if bytesRequired > 0 && bytesRequired < b.data.Len() {
@@ -273,6 +282,13 @@ func (b *Uint64Builder) NewUint64Array() (a *Uint64) {
 	a = NewUint64Data(data)
 	data.Release()
 	return
+}
+
+func (b *Uint64Builder) UnsafeUint64Array() (a *Uint64) {
+
+	var data *Data
+	data = NewData(arrow.PrimitiveTypes.Uint64, b.length, []*memory.Buffer{b.nullBitmap, b.data}, nil, b.nulls, 0)
+	return NewUint64Data(data)
 }
 
 func (b *Uint64Builder) newData() (data *Data) {
@@ -408,6 +424,13 @@ func (b *Float64Builder) NewFloat64Array() (a *Float64) {
 	return
 }
 
+func (b *Float64Builder) UnsafeFloat64Array() (a *Float64) {
+
+	var data *Data
+	data = NewData(arrow.PrimitiveTypes.Float64, b.length, []*memory.Buffer{b.nullBitmap, b.data}, nil, b.nulls, 0)
+	return NewFloat64Data(data)
+}
+
 func (b *Float64Builder) newData() (data *Data) {
 	bytesRequired := arrow.Float64Traits.BytesRequired(b.length)
 	if bytesRequired > 0 && bytesRequired < b.data.Len() {
@@ -539,6 +562,13 @@ func (b *Int32Builder) NewInt32Array() (a *Int32) {
 	a = NewInt32Data(data)
 	data.Release()
 	return
+}
+
+func (b *Int32Builder) UnsafeInt32Array() (a *Int32) {
+
+	var data *Data
+	data = NewData(arrow.PrimitiveTypes.Int32, b.length, []*memory.Buffer{b.nullBitmap, b.data}, nil, b.nulls, 0)
+	return NewInt32Data(data)
 }
 
 func (b *Int32Builder) newData() (data *Data) {
@@ -674,6 +704,13 @@ func (b *Uint32Builder) NewUint32Array() (a *Uint32) {
 	return
 }
 
+func (b *Uint32Builder) UnsafeUint32Array() (a *Uint32) {
+
+	var data *Data
+	data = NewData(arrow.PrimitiveTypes.Uint32, b.length, []*memory.Buffer{b.nullBitmap, b.data}, nil, b.nulls, 0)
+	return NewUint32Data(data)
+}
+
 func (b *Uint32Builder) newData() (data *Data) {
 	bytesRequired := arrow.Uint32Traits.BytesRequired(b.length)
 	if bytesRequired > 0 && bytesRequired < b.data.Len() {
@@ -805,6 +842,13 @@ func (b *Float32Builder) NewFloat32Array() (a *Float32) {
 	a = NewFloat32Data(data)
 	data.Release()
 	return
+}
+
+func (b *Float32Builder) UnsafeFloat32Array() (a *Float32) {
+
+	var data *Data
+	data = NewData(arrow.PrimitiveTypes.Float32, b.length, []*memory.Buffer{b.nullBitmap, b.data}, nil, b.nulls, 0)
+	return NewFloat32Data(data)
 }
 
 func (b *Float32Builder) newData() (data *Data) {
@@ -940,6 +984,13 @@ func (b *Int16Builder) NewInt16Array() (a *Int16) {
 	return
 }
 
+func (b *Int16Builder) UnsafeInt16Array() (a *Int16) {
+
+	var data *Data
+	data = NewData(arrow.PrimitiveTypes.Int16, b.length, []*memory.Buffer{b.nullBitmap, b.data}, nil, b.nulls, 0)
+	return NewInt16Data(data)
+}
+
 func (b *Int16Builder) newData() (data *Data) {
 	bytesRequired := arrow.Int16Traits.BytesRequired(b.length)
 	if bytesRequired > 0 && bytesRequired < b.data.Len() {
@@ -1071,6 +1122,13 @@ func (b *Uint16Builder) NewUint16Array() (a *Uint16) {
 	a = NewUint16Data(data)
 	data.Release()
 	return
+}
+
+func (b *Uint16Builder) UnsafeUint16Array() (a *Uint16) {
+
+	var data *Data
+	data = NewData(arrow.PrimitiveTypes.Uint16, b.length, []*memory.Buffer{b.nullBitmap, b.data}, nil, b.nulls, 0)
+	return NewUint16Data(data)
 }
 
 func (b *Uint16Builder) newData() (data *Data) {
@@ -1206,6 +1264,13 @@ func (b *Int8Builder) NewInt8Array() (a *Int8) {
 	return
 }
 
+func (b *Int8Builder) UnsafeInt8Array() (a *Int8) {
+
+	var data *Data
+	data = NewData(arrow.PrimitiveTypes.Int8, b.length, []*memory.Buffer{b.nullBitmap, b.data}, nil, b.nulls, 0)
+	return NewInt8Data(data)
+}
+
 func (b *Int8Builder) newData() (data *Data) {
 	bytesRequired := arrow.Int8Traits.BytesRequired(b.length)
 	if bytesRequired > 0 && bytesRequired < b.data.Len() {
@@ -1337,6 +1402,13 @@ func (b *Uint8Builder) NewUint8Array() (a *Uint8) {
 	a = NewUint8Data(data)
 	data.Release()
 	return
+}
+
+func (b *Uint8Builder) UnsafeUint8Array() (a *Uint8) {
+
+	var data *Data
+	data = NewData(arrow.PrimitiveTypes.Uint8, b.length, []*memory.Buffer{b.nullBitmap, b.data}, nil, b.nulls, 0)
+	return NewUint8Data(data)
 }
 
 func (b *Uint8Builder) newData() (data *Data) {
@@ -1471,6 +1543,13 @@ func (b *TimestampBuilder) NewTimestampArray() (a *Timestamp) {
 	a = NewTimestampData(data)
 	data.Release()
 	return
+}
+
+func (b *TimestampBuilder) UnsafeTimestampArray() (a *Timestamp) {
+
+	var data *Data
+	data = NewData(b.dtype, b.length, []*memory.Buffer{b.nullBitmap, b.data}, nil, b.nulls, 0)
+	return NewTimestampData(data)
 }
 
 func (b *TimestampBuilder) newData() (data *Data) {
