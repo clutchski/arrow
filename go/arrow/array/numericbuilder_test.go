@@ -105,3 +105,29 @@ func TestFloat32Builder_Empty(t *testing.T) {
 
 	ab.Release()
 }
+
+func TestInt64Builder_UnsafeMemory(t *testing.T) {
+	assert := assert.New(t)
+
+	mem := memory.NewCheckedAllocator(memory.NewGoAllocator())
+	mem.AssertSize(t, 0)
+	defer mem.AssertSize(t, 0)
+
+	ab := array.NewInt64Builder(mem)
+	defer ab.Release()
+
+	ab.AppendValues([]int64{1, 2}, nil)
+
+	ar := ab.UnsafeInt64Array()
+	assert.Equal(2, ar.Len())
+	assert.Equal(ar.Int64Values(), []int64{1, 2})
+	ar.Release()
+
+	ab.Append(3)
+
+	ar = ab.NewInt64Array()
+	assert.Equal(3, ar.Len())
+	assert.Equal(ar.Int64Values(), []int64{1, 2, 3})
+	ar.Release()
+
+}

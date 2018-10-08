@@ -148,6 +148,18 @@ func (b *{{.Name}}Builder) New{{.Name}}Array() (a *{{.Name}}) {
 	return
 }
 
+func (b *{{.Name}}Builder) Unsafe{{.Name}}Array() (a *{{.Name}}) {
+
+	var data *Data
+{{if .Opt.Parametric -}}
+	data = NewData(b.dtype, b.length, []*memory.Buffer{b.nullBitmap, b.data}, nil, b.nulls, 0)
+{{else -}}
+	data = NewData(arrow.PrimitiveTypes.{{.Name}}, b.length, []*memory.Buffer{b.nullBitmap, b.data}, nil, b.nulls, 0)
+{{end -}}
+
+	return New{{.Name}}Data(data)
+}
+
 func (b *{{.Name}}Builder) newData() (data *Data) {
 	bytesRequired := arrow.{{.Name}}Traits.BytesRequired(b.length)
 	if bytesRequired > 0 && bytesRequired < b.data.Len() {
